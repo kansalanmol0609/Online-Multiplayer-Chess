@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Chess Cube</title>
+    <link rel="icon" href="./img/icon.jpg">
+    <link rel="stylesheet" type="text/css" href="./css/semantic.min.css">
+    <link rel="stylesheet" href="./css/chessboard-1.0.0.min.css">
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+
+<body>
+    <audio id="myAudio">
+        <source src="./mp3/soundMove.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <audio id="messageTone">
+        <source src="./mp3/insight.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <!-- Navbar -->
+    <div>
+        <div style="margin: 0; border-bottom: 4px solid gray; padding: 3px 0; " class="ui secondary menu">
+            <img src="./img/icon.png" style="width:80px;height:80px;">
+            <h2 style="text-decoration: underline;">CHESS CUBE</h2>
+            <div class="right menu">
+                <div style="margin-top:20px; height: 40px; padding-right: 20px; margin-right: 15px;"
+                    class="ui labeled button" tabindex="0">
+                    <div class="ui button">
+                        <i class="user icon"></i> #Players
+                    </div>
+                    <a class="ui basic label">
+                        <span id="players">0</span>
+                    </a>
+                </div>
+
+                <div style="margin-top:20px; height: 40px; padding-left: 20px;  margin-right: 15px;"
+                    class="ui labeled button" tabindex="0">
+                    <div class="ui button">
+                        <i class="star icon"></i> #Rooms
+                    </div>
+                    <a class="ui basic label">
+                        <span id="rooms">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div>
+        <div id="gameMode">
+            <h1 style="text-align: center; margin: 10px; font-size: 35px;"> Game Mode</h1>
+            <div style="text-align:center;">
+                <button class="game ui black button " id="singlePlayer">Single Player</button>
+            </div>
+            <div style="text-align:center;">
+                <button class="game ui black button " id="multiPlayer">Multi Player</button>
+            </div>
+        </div>
+
+        <div id="joinFormDiv" style="display: none;">
+            <form id="joinForm">
+                <h1 style="text-align: center; margin: 10px; font-size: 35px;">Start Game</h1>
+                <div style="text-align:center;">
+                    <input class="formInput" type="text" placeholder="Name" style="padding: 10px;">
+                </div>
+                <div style="text-align:center;">
+                    <input class="formInput" type="text" placeholder="Room" style="padding: 10px;">
+                </div>
+                <div id="roomDropdownP" style="text-align:center;  height: 50px; margin: 10px; padding: 0 4px; ">
+                    <div id="roomDropdown" class="ui fluid search selection dropdown"
+                        style="border: 1px solid gray; width: 300px; margin:auto;">
+                        <input type="hidden" name="country">
+                        <i class="dropdown icon"></i>
+                        <div class="default text">Select Room</div>
+                        <div class="menu" id="dropRooms">
+                            <!-- <div class="item" data-value="af"><i class="icon star"></i>Afghanistan</div>
+                            <div class="item" data-value="ar"><i class="icon star"></i>Argentina</div> -->
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align:center;">
+                    <button class="game ui black button " id="joinButton">Join</button>
+                </div>
+                <div style="text-align:center;">
+                    <p id="message"></p>
+                </div>
+            </form>
+        </div>
+
+        <!-- /Input Form -->
+        <div>
+            <!-- Chess Board -->
+            <div id="chessGame" style="display: none;">
+                <!-- Color Schemes -->
+                <div style="text-align: center; margin: 10px;">
+                    <button id="grey_board" class="ui button black color_b">Grey</button>
+                    <button id="orange_board" class="ui button grey color_b">Orange</button>
+                    <button id="green_board" class="ui button grey color_b">Green</button>
+                    <button id="blue_board" class="ui button grey color_b">Blue</button>
+                </div>
+                <!-- Status and PGN -->
+                <div id="statusPGN" style="text-align: center; display: none;">
+                    <div>
+                        <label>
+                            <h3><strong>Status</strong></h3>
+                        </label>
+                        <div id="status">Your Turn</div>
+                    </div>
+                    <div>
+                        <label>
+                            <h3><strong>History</strong></h3>
+                        </label>
+                        <div id="pgn" style="overflow: auto; white-space: nowrap; width: 500px; margin: auto;"></div>
+                    </div>
+                </div>
+                <div id="myBoard" style="width: 569px; margin: auto; margin-top: 10px; margin-bottom: 10px;"></div>
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <a href="/" class="ui button black" style="width: 569px;">Leave Game</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Chatting window -->
+    <div id="chat"
+        style=" background-color: white; display: none; text-align: right; position: fixed; bottom: 0; right: 0; width: 400px; margin-right: 10px; border: 2px solid black;">
+        <div class="ui button grey" style="border-radius: 0; width: 100%; padding: 15px; font-size: 16px;"
+            id="messageBox">
+            Messages
+        </div>
+        <div id="chatBox" style="display: none; padding: 12px;">
+            <div id="chatContent" style="height: 240px; overflow-y: auto; word-break: break-all; ">
+                <!-- <div class="myMessage">Hello</div>
+                <div class="youMessage">his</div> -->
+            </div>
+            <form style="margin-bottom: 0;" class="ui form">
+                <div style="display: flex; justify-content: space-around;">
+                    <input class="form-control " id="inputMessage" type="text" placeholder="Send a Message"
+                        style="margin-right: 10px;">
+                    <button class="ui black button" id="send">Send</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div
+        style="background-color: black; color: white; margin-top:auto; padding: 15px; text-align: center; font-size: 15px;">
+        <i>"Avoid the crowd. Do your own thinking independently. Be the chess player, not the chess piece"</i></div>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="./js/semantic.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="./js/chessboard-1.0.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.2/chess.js"
+        integrity="sha384-s3XgLpvmHyscVpijnseAmye819Ee3yaGa8NxstkJVyA6nuDFjt59u1QvuEl/mecz"
+        crossorigin="anonymous"></script>
+    <script src="./js/app.js"></script>
+</body>
+
+</html>

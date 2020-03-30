@@ -1,0 +1,74 @@
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: visible;
+    display:flex; 
+    flex-direction:column; 
+}
+ #singlePlayer, #multiPlayer, #joinButton{
+    margin: 10px;
+    width: 300px;
+    padding: 20px;
+    font-size: 22px;
+ }
+
+ #gameMode, #joinFormDiv{
+    padding: 10px; 
+    margin-top: 8%;
+ }
+
+ .black-3c85d {
+    background-color: #E1E1E1;
+    color: #FFFFFF;
+}
+
+.white-1e1d7 {
+    background-color: #FFFFFF;
+    color: #E1E1E1;
+}
+
+#grey_board, #orange_board, #green_board, #blue_board{
+    margin: 6px;
+    width: 130px;
+}
+.formInput {
+    border: 1px solid gray;
+    height: 50px;
+    border-radius: 4px;
+    width: 300px;
+    margin: 10px;
+    padding: 0 4px;
+}
+
+.myMessage{
+    text-align: right;
+    padding: 8px;
+    background-color: #E0E0E0;
+    font-size: 17px;
+    margin-bottom: 10px;
+    margin-right: 7px;
+    clear:both;
+    float : right;
+    border-radius: 5px;    
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+}
+
+.youMessage{
+    text-align: left;
+    padding: 8px;
+    background-color: #616161;
+    color: white;
+    font-size: 17px;
+    margin-bottom: 10px;
+    clear:both;
+    border-radius: 5px;
+    float : left;    
+}
